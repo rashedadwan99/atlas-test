@@ -1,0 +1,58 @@
+import Logo from "../logo/Logo";
+import { Col } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { IoMdPlay } from "react-icons/io";
+
+function FooterLogoSocialMedia() {
+  const socialMedia = [
+    {
+      id: "f",
+      href: "https://www.facebook.com/idareorganisation/?_rdc=1&_rdr",
+      icon: <FaFacebookF />,
+    },
+
+    {
+      id: "l",
+      href: "https://www.linkedin.com/company/idareorg/",
+      icon: <FaLinkedinIn />,
+    },
+    {
+      id: "y",
+      href: "https://www.youtube.com/channel/UCSOKUsPA3zsd1u9qSid-7yQ?view_as=subscriber",
+      icon: <IoMdPlay />,
+    },
+    {
+      id: "i",
+      href: "https://www.instagram.com/idareorganisation/",
+      icon: <FaInstagram />,
+    },
+  ];
+  const navigate = (sm) => {
+    window.open(sm.href, "_blank");
+  };
+  const { t } = useTranslation();
+  return (
+    <Col className="footer_logo-social-media mb-4" xs={12} sm={12} md={5}>
+      <div className="footer_logo-container">
+        <Logo />
+      </div>
+      <div className="footer_social-media my-3">
+        {socialMedia.map((sm) => {
+          return (
+            <div
+              key={sm.id}
+              className="footer_social-media-icon"
+              onClick={() => navigate(sm)}
+            >
+              {sm.icon}
+            </div>
+          );
+        })}
+      </div>
+      <p>{t("Copyright")}</p>
+    </Col>
+  );
+}
+
+export default FooterLogoSocialMedia;

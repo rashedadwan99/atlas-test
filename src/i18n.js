@@ -1,0 +1,43 @@
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-http-backend";
+import ar from "./assets/translation/ar.json";
+import en from "./assets/translation/en.json";
+const availableLanguages = ["en", "ar"];
+
+const localStorageKey = "selectedLanguageAtlas";
+
+const resources = {
+  ar: {
+    translation: ar,
+  },
+  en: {
+    translation: en,
+  },
+};
+
+export const savedLanguage = localStorage.getItem(localStorageKey);
+
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    fallbackLng: "en",
+
+    detection: {
+      order: ["path", "cookie", "htmlTag", "localStorage", "subdomain"],
+      caches: ["cookie"],
+    },
+    whitelist: availableLanguages,
+
+    interpolation: {
+      escapeValue: false,
+    },
+    lng: savedLanguage || "en",
+  });
+i18n.on("languageChanged", (newLang) => {
+  localStorage.setItem(localStorageKey, newLang);
+});
+
+export default i18n;
