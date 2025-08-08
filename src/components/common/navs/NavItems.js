@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DropDownMenu from "./DropDownMenu";
 import { useSelector } from "react-redux";
 import { routes } from "../../../routes/routes";
+import AosContainer from "../aos/Aos";
 
 function NavItems({ links, isFooter = false, setOpenMenu }) {
   const navigate = useNavigate();
@@ -25,38 +26,40 @@ function NavItems({ links, isFooter = false, setOpenMenu }) {
 
   return links.map((n, i) => {
     return (
-      <Nav
-        style={{ position: "relative" }}
-        key={n.path || n.href || n.label || n.id}
-      >
-        {n.dropDownMenu ? (
-          <>
-            <NavDropdown
-              title={n.label}
-              id="basic-nav-dropdown"
-              className={isArabic ? "ar" : ""}
+      <AosContainer data-aos="zoom-in">
+        <Nav
+          style={{ position: "relative" }}
+          key={n.path || n.href || n.label || n.id}
+        >
+          {n.dropDownMenu ? (
+            <>
+              <NavDropdown
+                title={n.label}
+                id="basic-nav-dropdown"
+                className={isArabic ? "ar" : ""}
+              >
+                <DropDownMenu
+                  links={n.dropDownMenu}
+                  handleClickNavLink={handleClickNavLink}
+                />
+              </NavDropdown>
+            </>
+          ) : (
+            <NavLink
+              onClick={() => !n.href && handleClickNavLink(n)}
+              href={n.href && n.href}
+              target="_blank"
+              active={
+                (window.location.pathname === n.path ||
+                  window.location.pathname === n.path2) &&
+                !isFooter
+              }
             >
-              <DropDownMenu
-                links={n.dropDownMenu}
-                handleClickNavLink={handleClickNavLink}
-              />
-            </NavDropdown>
-          </>
-        ) : (
-          <NavLink
-            onClick={() => !n.href && handleClickNavLink(n)}
-            href={n.href && n.href}
-            target="_blank"
-            active={
-              (window.location.pathname === n.path ||
-                window.location.pathname === n.path2) &&
-              !isFooter
-            }
-          >
-            {n.label}
-          </NavLink>
-        )}
-      </Nav>
+              {n.label}
+            </NavLink>
+          )}
+        </Nav>
+      </AosContainer>
     );
   });
 }

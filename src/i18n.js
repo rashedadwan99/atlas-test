@@ -1,43 +1,40 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-http-backend";
+
+// Translations
 import ar from "./assets/translation/ar.json";
 import en from "./assets/translation/en.json";
-const availableLanguages = ["en", "ar"];
 
+// Supported languages
+const availableLanguages = ["en", "ar"];
 const localStorageKey = "selectedLanguageAtlas";
 
+// Load saved language or fallback to 'en'
+const savedLanguage = localStorage.getItem(localStorageKey) || "en";
+// Make sure it's a valid language (optional safety check)
+const initialLanguage = availableLanguages.includes(savedLanguage)
+  ? savedLanguage
+  : "en";
+
+// Define resources
 const resources = {
-  ar: {
-    translation: ar,
-  },
-  en: {
-    translation: en,
-  },
+  ar: { translation: ar },
+  en: { translation: en },
 };
 
-export const savedLanguage = localStorage.getItem(localStorageKey);
+// Initialize i18n
+i18n.use(initReactI18next).init({
+  resources,
+  fallbackLng: "en",
+  lng: initialLanguage, // ✅ This sets the starting language
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
-i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    resources,
-    fallbackLng: "en",
-
-    detection: {
-      order: ["path", "cookie", "htmlTag", "localStorage", "subdomain"],
-      caches: ["cookie"],
-    },
-    whitelist: availableLanguages,
-
-    interpolation: {
-      escapeValue: false,
-    },
-    lng: savedLanguage || "en",
-  });
-i18n.on("languageChanged", (newLang) => {
-  localStorage.setItem(localStorageKey, newLang);
+// Whenever the language changes, update localStorage
+i18n.on("languageChanged", (lang) => {
+  localStorage.setItem(localStorageKey, lang);
 });
 
 export default i18n;

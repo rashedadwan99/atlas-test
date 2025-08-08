@@ -9,7 +9,7 @@ export default function Writer({ sentence }) {
   React.useEffect(() => {
     const typed = new Typed(el.current, {
       strings: [sentence],
-      typeSpeed: 200,
+      typeSpeed: 100,
       loop: true,
     });
 

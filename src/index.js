@@ -9,11 +9,11 @@ import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Router>
-    <I18nextProvider i18n={i18n}>
+  <I18nextProvider i18n={i18n}>
+    <Router>
       <Provider store={store}>
         <App />
       </Provider>
-    </I18nextProvider>
-  </Router>
+    </Router>
+  </I18nextProvider>
 );
