@@ -86,7 +86,7 @@ function AosContainer({
   }, [handleScroll]);
 
   return (
-    <div
+    <Col
       sm={12}
       data-aos={
         dataaos
@@ -99,7 +99,7 @@ function AosContainer({
       {...rest}
     >
       {children}
-    </div>
+    </Col>
   );
 }
 

@@ -37,7 +37,7 @@ function Footer({ homePage, campaignsList, programs }) {
 
   return (
     <Row
-      className={`justify-content-around footer py-3 ${isArabic ? "ar" : "en"}`}
+      className={`justify-content-around footer py-5 ${isArabic ? "ar" : "en"}`}
     >
       <Col xs={12} sm={11} md={11} lg={10}>
         <Row>
@@ -49,17 +49,6 @@ function Footer({ homePage, campaignsList, programs }) {
               {/* <FooterPageLinks title={t("programs")} links={programslinks} /> */}
             </Row>
           </Col>
-        </Row>
-      </Col>
-      <Col
-        xs={12}
-        sm={11}
-        md={11}
-        lg={11}
-        style={{ direction: isArabic ? "rtl" : "ltr" }}
-      >
-        <Row className="footer_contact-us justify-content-center">
-          {t("Copyright")}
         </Row>
       </Col>
     </Row>

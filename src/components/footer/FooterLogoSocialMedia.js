@@ -3,6 +3,7 @@ import { Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { IoMdPlay } from "react-icons/io";
+import AosContainer from "../common/aos/Aos";
 
 function FooterLogoSocialMedia() {
   const socialMedia = [
@@ -33,24 +34,28 @@ function FooterLogoSocialMedia() {
   };
   const { t } = useTranslation();
   return (
-    <Col className="footer_logo-social-media mb-4" xs={12} sm={12} md={5}>
+    <Col className="footer_logo-social-media" xs={12} sm={12} md={5}>
       <div className="footer_logo-container">
-        <Logo />
+        <AosContainer dataaos="zoom-in">
+          <Logo />
+        </AosContainer>
       </div>
       <div className="footer_social-media my-3">
-        {socialMedia.map((sm) => {
+        {socialMedia.map((sm, i) => {
           return (
             <div
-              key={sm.id}
+              key={i}
               className="footer_social-media-icon"
               onClick={() => navigate(sm)}
             >
-              {sm.icon}
+              <AosContainer dataaos="flip-up">{sm.icon}</AosContainer>
             </div>
           );
         })}
       </div>
-      <p>{t("Copyright")}</p>
+      <AosContainer dataaos="flip-up">
+        <p style={{ fontWeight: "bold" }}>{t("Copyright")}</p>
+      </AosContainer>
     </Col>
   );
 }

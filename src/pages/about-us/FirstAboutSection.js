@@ -16,7 +16,7 @@ function FirstAboutSection() {
         alt="Landing Background"
         className="landing_background"
       />
-      <Col xs={11} sm={6}>
+      <Col xs={11} sm={8} md={6}>
         <div className="landing_title">
           <AosContainer dataaos="fade-up">
             <h2>{t("acacia")}</h2>

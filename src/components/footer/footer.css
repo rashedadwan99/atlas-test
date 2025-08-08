@@ -2,10 +2,9 @@
   background-color: var(--white);
   font-size: 14px;
   border-top: 1px solid var(--blue-gray);
-  background-size: 90%;
-  background-position-x: 25%;
   background-repeat: no-repeat;
   text-transform: capitalize;
+  height: 60vh;
 }
 
 .footer.ar {
